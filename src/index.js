@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import './style.scss';
 
 let time = 0;
 setInterval(() => {
