@@ -12,3 +12,15 @@ TODO: add deployed link and short description of how you deployed
 ## Acknowledgments
 
 TODO: provide a list of sources used in project
+
+## Functional Specs
+
+- [ ] add note
+- [ ] delete note
+- [ ] move note (x, y)
+- [ ] edit note
+- note structure
+  - [ ] title
+  - [ ] content
+- persists all changes in real time
+- updates based on fb events
