@@ -12,7 +12,7 @@ import React from 'react';
 
 function Note(props) {
   return (
-    <div id={props.Note.id}>{props.Note.text}</div>
+    <div id={props.id} className="">{props.text}</div>
   );
 }
 

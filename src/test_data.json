@@ -7,10 +7,10 @@
         "zIndex": "26"
     }, 
     "2": {
-        "title": "",
-        "text": "",
-        "x": "",
-        "y": "",
-        "zIndex": ""
+        "title": "title",
+        "text": "text",
+        "x": "1",
+        "y": "1",
+        "zIndex": "1"
     }
 }
