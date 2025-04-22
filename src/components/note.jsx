@@ -1,12 +1,17 @@
-// import React from 'react';
-// import { produce } from 'immer';
+import React from 'react';
 
-// /**
-//  * Note Component
-//  *
-//  * Display  title
-//  *          content
-//  * Is   draggable
-//  *      editable
-//  *      deletable
-//  */
+/**
+ * Note Component
+ *
+ * Display  title
+ *          content
+ * Is   draggable
+ *      editable
+ *      deletable
+ */
+
+function Note(props) {
+  return (
+    <div id={props.Note.id}>{props.Note.text}</div>
+  );
+}
