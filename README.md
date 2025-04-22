@@ -1,9 +1,14 @@
-# Title
-TODO: short project description, some screenshots
+# Lab 3 | React Notes
+A post-it note style app where users can add notes, move them around, edit 
+them, and delete them. This React app uses Firebase as its backend to store 
+collections of notes. It is designed so that people in multiple browsers can 
+edit and arrange them in real-time. The notes themselves will support 
+markdown notation and editing.
 
 ## Setup
 
-TODO: how to get the project dev environment up and running, npm install etc
+To set up the dev environment for this project, run `npm install` from the 
+root directory.
 
 ## Deployment
 

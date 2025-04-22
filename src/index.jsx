@@ -1,10 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import './style.scss';
-
-function App() {
-  return <div className="test">All the REACT are belong to us!</div>;
-}
+import App from './components/app';
 
 // Instantiate a react root instance + attaching it to #main element
 const root = createRoot(document.getElementById('main'));
