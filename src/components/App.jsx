@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { produce } from 'immer';
+import Draggable from 'react-draggable';
 import Note from './Note';
 
 function App() {
+  const [maxZ, setMaxZ] = useState(0);
   const [notes, setNotes] = useState({
     // For testing
     1: {
       title: 'testing',
       text: 'I is a note',
-      x: '400',
-      y: '12',
-      zIndex: '26',
+      x: '1',
+      y: '1',
+      zIndex: '0',
     },
     2: {
-      title: 'title',
-      text: 'text',
+      title: 'note title',
+      text: 'note content',
       x: '1',
       y: '1',
       zIndex: '1',
@@ -48,8 +50,26 @@ function App() {
     );
   };
 
-  // TODO: Update Note Content function?
-  // TODO: Update Note Position function?
+  // 'Edit Note' function
+  const editNote = (noteID, newContent) => {
+    setNotes(
+      produce((draft) => {
+        draft[noteID].text = newContent;
+      }),
+    );
+  };
+
+  // 'Move Note' function
+  const moveNote = (noteID, newX, newY) => {
+    setMaxZ((prevMaxZ) => prevMaxZ + 1);
+    setNotes(
+      produce((draft) => {
+        draft[noteID].x = newX;
+        draft[noteID].y = newY;
+        draft[noteID].zIndex = maxZ + 1;
+      }),
+    );
+  };
 
   useEffect(() => {
     console.log(notes);
@@ -58,15 +78,15 @@ function App() {
   return (
     <div>
 
-      <div className="notes-container">
+      <div className="note-container">
+        {/* Render each note in our list of notes */}
         {Object.entries(notes).map(([id, note]) => {
-          // perhaps you might return some jsx here :-)
-          // return (<Note id={id} note={note} /*...*/ </Note>) // for instance maybe
           return (
-            <Note id={id} />
+            <Note id={id} note={note} handleDrag={moveNote} key={id} />
           );
         })}
       </div>
+
     </div>
   );
 }

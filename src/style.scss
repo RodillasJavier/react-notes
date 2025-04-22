@@ -15,3 +15,29 @@ body, html {
     background-repeat: no-repeat;
     background-size: contain;
 }
+
+.note-item {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border: black, solid, 0.1rem;
+    width: fit-content;
+    max-width: 50rem;
+    z-index: attr(data-z-index);
+
+    .drag-handle, 
+    .title {
+        background-color: whitesmoke;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        cursor: grab;
+    }
+
+    .text {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
