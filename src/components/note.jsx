@@ -15,3 +15,5 @@ function Note(props) {
     <div id={props.Note.id}>{props.Note.text}</div>
   );
 }
+
+export default Note;

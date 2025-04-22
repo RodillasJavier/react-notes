@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { produce } from 'immer';
-import Note from './Note';
+import Note from './note';
 
 function App(props) {
   const [notes, setNotes] = useState({
