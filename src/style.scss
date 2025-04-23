@@ -1,5 +1,11 @@
+// GENERAL
 :root {
     text-size-adjust: 100%;
+}
+
+* {
+    margin: 0;
+    padding: 0;
 }
 
 body, html {
@@ -22,22 +28,44 @@ body, html {
     flex-direction: column;
     background-color: white;
     border: black, solid, 0.1rem;
+    border-radius: 0.5rem;
     width: fit-content;
-    max-width: 50rem;
-    z-index: attr(data-z-index);
+    max-width: 25rem;
 
-    .drag-handle, 
-    .title {
-        background-color: whitesmoke;
+    .toolbar {
         display: flex;
         flex-direction: row;
-        justify-content: center;
-        cursor: grab;
+        justify-content: space-between;
+        padding: 1rem 1rem 0rem 1rem;
+        font-size: 1.5rem;
     }
 
-    .text {
+    .icon {
+        cursor: pointer;
+    }
+  
+    .icon.drag-handle {
+        cursor: move;
+
+        &:active {
+            cursor: grabbing;
+        }
+    }
+
+    .content {
         display: flex;
         flex-direction: column;
-        align-items: center;
+        gap: 1rem;
+        padding: 0rem 1rem 1rem 1rem;
+
+        .title {
+            text-align: center;
+            font-size: 3rem;
+        }
+    
+        .text {
+            text-align: center;
+            text-wrap-mode: wrap;
+        }
     }
 }

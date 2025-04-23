@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { produce } from 'immer';
-import Draggable from 'react-draggable';
 import Note from './Note';
 
 function App() {
@@ -9,14 +8,14 @@ function App() {
     // For testing
     1: {
       title: 'testing',
-      text: 'I is a note',
+      text: 'Testing out having content in a note',
       x: '1',
       y: '1',
       zIndex: '0',
     },
     2: {
       title: 'note title',
-      text: 'note content',
+      text: 'note content note content note content note content note content note content note content note content note content note content note content note content note content ',
       x: '1',
       y: '1',
       zIndex: '1',

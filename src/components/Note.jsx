@@ -30,10 +30,17 @@ function Note(props) {
     >
 
       <div ref={nodeRef} id={props.id} className="note-item" style={{ zIndex: props.note.zIndex }}>
-        <div className="drag-handle">
-          <h1 className="title">{props.note.title}</h1>
+
+        <div className="toolbar">
+          <i className="fa-solid fa-grip icon drag-handle" />
+          <i className="fa-solid fa-trash icon" />
         </div>
-        <p className="text">{props.note.text}</p>
+
+        <div className="content">
+          <h1 className="title">{props.note.title}</h1>
+          <p className="text">{props.note.text}</p>
+        </div>
+
       </div>
 
     </Draggable>
