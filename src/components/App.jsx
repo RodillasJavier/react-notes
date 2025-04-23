@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { produce } from 'immer';
 import Note from './Note';
+import TitleBar from './TitleBar';
 
 function App() {
   const [maxZ, setMaxZ] = useState(0);
@@ -77,7 +78,7 @@ function App() {
 
   return (
     <div>
-
+      <TitleBar />
       <div className="note-container">
         {/* Render each note in our list of notes */}
         {Object.entries(notes).map(([id, note]) => {

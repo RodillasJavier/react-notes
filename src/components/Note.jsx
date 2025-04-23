@@ -11,7 +11,6 @@ function Note(props) {
 
   const renderContentSection = () => {
     if (isEditing) {
-      // TODO Render editable box
       return (
         <div className="content">
           <input
