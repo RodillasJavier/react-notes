@@ -81,7 +81,13 @@ function App() {
         {/* Render each note in our list of notes */}
         {Object.entries(notes).map(([id, note]) => {
           return (
-            <Note id={id} note={note} handleDrag={moveNote} key={id} />
+            <Note
+              id={id}
+              note={note}
+              handleDrag={moveNote}
+              handleDelete={deleteNote}
+              key={id}
+            />
           );
         })}
       </div>
