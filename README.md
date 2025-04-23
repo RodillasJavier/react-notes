@@ -20,12 +20,12 @@ TODO: provide a list of sources used in project
 
 ## Functional Specs
 
-- [ ] add note
-- [ ] delete note
-- [ ] move note (x, y)
-- [ ] edit note
+- [x] add note (title bar)
+- [x] delete note
+- [x] move note (x, y)
+- [x] edit note
 - note structure
-  - [ ] title
-  - [ ] content
-- persists all changes in real time
-- updates based on fb events
+  - [x] title
+  - [x] content
+- [ ] persists all changes in real time
+- [ ] updates based on fb events

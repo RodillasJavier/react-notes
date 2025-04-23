@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import Draggable from 'react-draggable';
+import Markdown from 'react-markdown';
 
 function Note(props) {
   const nodeRef = useRef(null);
@@ -30,7 +31,8 @@ function Note(props) {
       return (
         <div className="content">
           <h1 className="title">{props.note.title}</h1>
-          <p className="text">{props.note.text}</p>
+          <Markdown>{props.note.text}</Markdown>
+          {/* <p className="text">{props.note.text}</p> */}
         </div>
       );
     }

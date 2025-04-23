@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 function TitleBar(props) {
   const [title, setTitle] = useState('');
 
+  //  Function to add a new note to the application
   const handleAdd = () => {
     if (props.handleAdd && title.trim()) {
       const newNote = {
