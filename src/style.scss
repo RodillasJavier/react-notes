@@ -31,6 +31,7 @@ body, html {
     border-radius: 0.5rem;
     width: fit-content;
     max-width: 25rem;
+    gap: 1rem;
 
     .toolbar {
         display: flex;
@@ -38,17 +39,17 @@ body, html {
         justify-content: space-between;
         padding: 1rem 1rem 0rem 1rem;
         font-size: 1.5rem;
-    }
 
-    .icon {
-        cursor: pointer;
-    }
-  
-    .icon.drag-handle {
-        cursor: move;
-
-        &:active {
-            cursor: grabbing;
+        .icon {
+            cursor: pointer;
+        }
+      
+        .icon.drag-handle {
+            cursor: move;
+    
+            &:active {
+                cursor: grabbing;
+            }
         }
     }
 

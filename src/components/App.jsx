@@ -53,7 +53,8 @@ function App() {
   const editNote = (noteID, newContent) => {
     setNotes(
       produce((draft) => {
-        draft[noteID].text = newContent;
+        draft[noteID].title = newContent.title;
+        draft[noteID].text = newContent.text;
       }),
     );
   };
@@ -86,6 +87,7 @@ function App() {
               note={note}
               handleDrag={moveNote}
               handleDelete={deleteNote}
+              handleEdit={editNote}
               key={id}
             />
           );

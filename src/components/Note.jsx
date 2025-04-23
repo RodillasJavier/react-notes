@@ -1,8 +1,41 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import Draggable from 'react-draggable';
 
 function Note(props) {
   const nodeRef = useRef(null);
+  const [isEditing, setIsEditing] = useState(false);
+  const [noteContent, setNoteContent] = useState({
+    title: props.note.title,
+    text: props.note.text,
+  });
+
+  const renderContentSection = () => {
+    if (isEditing) {
+      // TODO Render editable box
+      return (
+        <div className="content">
+          <input
+            type="text"
+            className="title"
+            value={noteContent.title}
+            onChange={(e) => setNoteContent({ ...noteContent, title: e.target.value })}
+          />
+          <textarea
+            className="text"
+            value={noteContent.text}
+            onChange={(e) => setNoteContent({ ...noteContent, text: e.target.value })}
+          />
+        </div>
+      );
+    } else {
+      return (
+        <div className="content">
+          <h1 className="title">{props.note.title}</h1>
+          <p className="text">{props.note.text}</p>
+        </div>
+      );
+    }
+  };
 
   // Handle 'dragging' around the screen
   const handleDrag = (e, data) => {
@@ -15,6 +48,44 @@ function Note(props) {
   const handleDelete = () => {
     if (props.handleDelete) {
       props.handleDelete(props.id);
+    }
+  };
+
+  // Handle switching modes + saving content whenever edit buttons are pressed
+  const handleEditToggle = () => {
+    // If we are in editing mode, save content before switching out
+    if (isEditing) {
+      if (props.handleEdit) {
+        props.handleEdit(props.id, noteContent);
+      }
+    }
+
+    // Flip the boolean to change modes
+    setIsEditing(!isEditing);
+  };
+
+  // Update the edit icon based on the mode that we are in
+  const renderEditIcon = () => {
+    if (!isEditing) {
+      return (
+        <i
+          onClick={handleEditToggle}
+          className="fa-solid fa-pen icon"
+          role="button"
+          tabIndex="0"
+          aria-label="Edit Icon"
+        />
+      );
+    } else {
+      return (
+        <i
+          onClick={handleEditToggle}
+          className="fa-solid fa-floppy-disk icon"
+          role="button"
+          tabIndex="0"
+          aria-label="Save Icon"
+        />
+      );
     }
   };
 
@@ -34,7 +105,6 @@ function Note(props) {
 
         {/* Toolbar to contain our controls for the notes */}
         <div className="toolbar">
-          <i className="fa-solid fa-grip icon drag-handle" />
           <i
             onClick={handleDelete}
             className="fa-solid fa-trash icon"
@@ -42,12 +112,12 @@ function Note(props) {
             tabIndex="0"
             aria-label="delete note"
           />
+          <i className="fa-solid fa-grip-lines icon drag-handle" />
+          {renderEditIcon()}
         </div>
 
-        <div className="content">
-          <h1 className="title">{props.note.title}</h1>
-          <p className="text">{props.note.text}</p>
-        </div>
+        {/* Display our content */}
+        {renderContentSection()}
 
       </div>
 
