@@ -5,23 +5,7 @@ import TitleBar from './TitleBar';
 
 function App() {
   const [maxZ, setMaxZ] = useState(0);
-  const [notes, setNotes] = useState({
-    // For testing
-    1: {
-      title: 'testing',
-      text: 'Testing out having content in a note',
-      x: '1',
-      y: '1',
-      zIndex: '0',
-    },
-    2: {
-      title: 'note title',
-      text: 'note content note content note content note content note content note content note content note content note content note content note content note content note content ',
-      x: '1',
-      y: '1',
-      zIndex: '1',
-    },
-  });
+  const [notes, setNotes] = useState({});
 
   // 'Update Notes' function
   const updateNotes = (noteID, fields) => {
@@ -78,7 +62,7 @@ function App() {
 
   return (
     <div>
-      <TitleBar />
+      <TitleBar handleAdd={addNote} />
       <div className="note-container">
         {/* Render each note in our list of notes */}
         {Object.entries(notes).map(([id, note]) => {

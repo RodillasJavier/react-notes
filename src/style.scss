@@ -35,6 +35,7 @@ body, html {
     position: absolute;
     display: flex;
     flex-direction: column;
+    word-break: break-all;
     background-color: white;
     border: black, solid, 0.1rem;
     border-radius: 0.5rem;
@@ -47,6 +48,7 @@ body, html {
         flex-direction: row;
         justify-content: space-between;
         padding: 1rem 1rem 0rem 1rem;
+        gap: 1rem;
         font-size: 2rem;  // For icons
       
         .icon.drag-handle {
