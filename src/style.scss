@@ -22,14 +22,6 @@ body, html {
     height: 100vh;
 }
 
-.logo {
-    background-image: url('image/goku.png');
-    width: 100px;
-    height: 100px;
-    background-repeat: no-repeat;
-    background-size: contain;
-}
-
 .icon {
     cursor: pointer;
 
@@ -41,7 +33,7 @@ body, html {
 
 
 // NOTE COMPONENT
-.note-item {
+.note {
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -49,7 +41,6 @@ body, html {
     background-color: white;
     border: black, solid, 0.1rem;
     border-radius: 0.5rem;
-    width: fit-content;
     max-width: 25rem;
     gap: 1rem;
 

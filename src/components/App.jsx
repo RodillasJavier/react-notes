@@ -1,6 +1,7 @@
 // Set the configuration for our app
 import React, { useEffect, useState } from 'react';
 import Note from './Note';
+import NoteContainer from './NoteContainer';
 import TitleBar from './TitleBar';
 import {
   onNotesValueChange, createNote, removeNote, updateNoteContent, updateNotePosition,
@@ -11,14 +12,14 @@ function App() {
   const [notes, setNotes] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // 'Delete Note' function
-  const deleteNote = (noteID) => {
-    removeNote(noteID);
-  };
-
   // 'Add Note' function
   const addNote = (noteID, newNote) => {
     createNote(newNote);
+  };
+
+  // 'Delete Note' function
+  const deleteNote = (noteID) => {
+    removeNote(noteID);
   };
 
   // 'Edit Note' function
@@ -50,22 +51,13 @@ function App() {
   return (
     <div>
       <TitleBar handleAdd={addNote} />
-      <div className="note-container">
-        {/* Render each note in our list of notes */}
-        {Object.entries(notes).map(([id, note]) => {
-          return (
-            <Note
-              id={id}
-              note={note}
-              handleDrag={moveNote}
-              handleDelete={deleteNote}
-              handleEdit={editNote}
-              key={id}
-            />
-          );
-        })}
-      </div>
-
+      <NoteContainer
+        className="note-container"
+        notes={notes}
+        handleEdit={editNote}
+        handleDrag={moveNote}
+        handleDelete={deleteNote}
+      />
     </div>
   );
 }

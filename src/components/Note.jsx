@@ -32,7 +32,6 @@ function Note(props) {
         <div className="content">
           <h1 className="title">{props.note.title}</h1>
           <Markdown>{props.note.text}</Markdown>
-          {/* <p className="text">{props.note.text}</p> */}
         </div>
       );
     }
@@ -74,7 +73,7 @@ function Note(props) {
           className="fa-solid fa-pen icon"
           role="button"
           tabIndex="0"
-          aria-label="Edit Icon"
+          aria-label="edit"
         />
       );
     } else {
@@ -84,7 +83,7 @@ function Note(props) {
           className="fa-solid fa-floppy-disk icon"
           role="button"
           tabIndex="0"
-          aria-label="Save Icon"
+          aria-label="done-editing"
         />
       );
     }
@@ -102,7 +101,7 @@ function Note(props) {
     >
 
       {/* Our note element */}
-      <div ref={nodeRef} id={props.id} className="note-item" style={{ zIndex: props.note.zIndex }}>
+      <div ref={nodeRef} id={props.id} className="note" style={{ zIndex: props.note.zIndex }}>
 
         {/* Toolbar to contain our controls for the notes */}
         <div className="toolbar">
@@ -111,7 +110,7 @@ function Note(props) {
             className="fa-solid fa-trash icon"
             role="button"
             tabIndex="0"
-            aria-label="delete note"
+            aria-label="delete"
           />
           <i className="fa-solid fa-grip-lines icon drag-handle" />
           {renderEditIcon()}
