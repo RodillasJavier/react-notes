@@ -1,37 +1,15 @@
+// Set the configuration for our app
 import React, { useEffect, useState } from 'react';
-import { produce } from 'immer';
-import firebase from 'firebase/compat/app';
 import Note from './Note';
 import TitleBar from './TitleBar';
 import {
   onNotesValueChange, createNote, removeNote, updateNoteContent, updateNotePosition,
 } from '../services/datastore';
 
-// Set the configuration for our app
-const config = {
-  apiKey: 'AIzaSyDWHxa9msjplvlmLWP5mUK65KsQalsB_D4',
-  authDomain: 'firenotes-1a896.firebaseapp.com',
-  databaseURL: 'https://firenotes-1a896-default-rtdb.firebaseio.com',
-  storageBucket: 'firenotes-1a896.firebasestorage.app',
-  projectId: 'firenotes-1a896',
-};
-firebase.initializeApp(config);
-
-// Get a reference to the database service
-const database = firebase.database();
-
 function App() {
   const [maxZ, setMaxZ] = useState(0);
-  const [notes, setNotes] = useState({});
-
-  // 'Update Notes' function
-  const updateNotes = (noteID, fields) => {
-    setNotes(
-      produce((draft) => {
-        draft[noteID] = { ...draft[noteID], ...fields };
-      }),
-    );
-  };
+  const [notes, setNotes] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   // 'Delete Note' function
   const deleteNote = (noteID) => {
@@ -55,12 +33,19 @@ function App() {
   };
 
   useEffect(() => {
+    const unsubscribe = onNotesValueChange((newNotes) => {
+      setNotes(newNotes);
+      setLoading(false);
+    });
+
     return () => {
-      onNotesValueChange((newNotes) => {
-        setNotes(newNotes);
-      });
+      if (unsubscribe) unsubscribe();
     };
   }, []);
+
+  if (loading) {
+    return <div id="loading-screen">Loading...</div>;
+  }
 
   return (
     <div>

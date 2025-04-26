@@ -1,6 +1,16 @@
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/database';
 
+// Set the configuration for our app
+const config = {
+  apiKey: 'AIzaSyDWHxa9msjplvlmLWP5mUK65KsQalsB_D4',
+  authDomain: 'firenotes-1a896.firebaseapp.com',
+  databaseURL: 'https://firenotes-1a896-default-rtdb.firebaseio.com',
+  storageBucket: 'firenotes-1a896.firebasestorage.app',
+  projectId: 'firenotes-1a896',
+};
+firebase.initializeApp(config);
+
 const database = firebase.database();
 const notesRef = database.ref('notes');
 
