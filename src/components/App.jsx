@@ -1,7 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { produce } from 'immer';
+import firebase from 'firebase/compat/app';
 import Note from './Note';
 import TitleBar from './TitleBar';
+import {
+  onNotesValueChange, createNote, removeNote, updateNoteContent, updateNotePosition,
+} from '../services/datastore';
+
+// Set the configuration for our app
+const config = {
+  apiKey: 'AIzaSyDWHxa9msjplvlmLWP5mUK65KsQalsB_D4',
+  authDomain: 'firenotes-1a896.firebaseapp.com',
+  databaseURL: 'https://firenotes-1a896-default-rtdb.firebaseio.com',
+  storageBucket: 'firenotes-1a896.firebasestorage.app',
+  projectId: 'firenotes-1a896',
+};
+firebase.initializeApp(config);
+
+// Get a reference to the database service
+const database = firebase.database();
 
 function App() {
   const [maxZ, setMaxZ] = useState(0);
@@ -18,46 +35,31 @@ function App() {
 
   // 'Delete Note' function
   const deleteNote = (noteID) => {
-    setNotes(
-      produce((draft) => {
-        delete draft[noteID];
-      }),
-    );
+    removeNote(noteID);
   };
 
   // 'Add Note' function
   const addNote = (noteID, newNote) => {
-    setNotes(
-      produce((draft) => {
-        draft[noteID] = newNote;
-      }),
-    );
+    createNote(newNote);
   };
 
   // 'Edit Note' function
   const editNote = (noteID, newContent) => {
-    setNotes(
-      produce((draft) => {
-        draft[noteID].title = newContent.title;
-        draft[noteID].text = newContent.text;
-      }),
-    );
+    updateNoteContent(noteID, newContent);
   };
 
   // 'Move Note' function
   const moveNote = (noteID, newX, newY) => {
     setMaxZ((prevMaxZ) => prevMaxZ + 1);
-    setNotes(
-      produce((draft) => {
-        draft[noteID].x = newX;
-        draft[noteID].y = newY;
-        draft[noteID].zIndex = maxZ + 1;
-      }),
-    );
+    updateNotePosition(noteID, newX, newY, maxZ);
   };
 
   useEffect(() => {
-    console.log(notes);
+    return () => {
+      onNotesValueChange((newNotes) => {
+        setNotes(newNotes);
+      });
+    };
   }, []);
 
   return (
