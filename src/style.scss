@@ -86,15 +86,21 @@ body, html {
     padding: 0.75rem;
     background-color: var(--gray);
 
-    input[type=text] {
-        border: black solid 0.1rem;
-        border-radius: 3rem;
-        padding: 0rem 1rem;
+    .noteinput {
+        display: flex;
+        justify-content: center;
         width: 50%;
-        font-size: 1.25rem;
-        
-        &::placeholder {
-            text-align: center;
+
+        input[type=text] {
+            border: black solid 0.1rem;
+            border-radius: 3rem;
+            padding: 0rem 1rem;
+            font-size: 1.25rem;
+            width: 100%;
+            
+            &::placeholder {
+                text-align: center;
+            }
         }
     }
 
