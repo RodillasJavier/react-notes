@@ -1,64 +1,51 @@
+// Set the configuration for our app
 import React, { useEffect, useState } from 'react';
-import { produce } from 'immer';
 import Note from './Note';
 import TitleBar from './TitleBar';
+import {
+  onNotesValueChange, createNote, removeNote, updateNoteContent, updateNotePosition,
+} from '../services/datastore';
 
 function App() {
   const [maxZ, setMaxZ] = useState(0);
-  const [notes, setNotes] = useState({});
-
-  // 'Update Notes' function
-  const updateNotes = (noteID, fields) => {
-    setNotes(
-      produce((draft) => {
-        draft[noteID] = { ...draft[noteID], ...fields };
-      }),
-    );
-  };
+  const [notes, setNotes] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   // 'Delete Note' function
   const deleteNote = (noteID) => {
-    setNotes(
-      produce((draft) => {
-        delete draft[noteID];
-      }),
-    );
+    removeNote(noteID);
   };
 
   // 'Add Note' function
   const addNote = (noteID, newNote) => {
-    setNotes(
-      produce((draft) => {
-        draft[noteID] = newNote;
-      }),
-    );
+    createNote(newNote);
   };
 
   // 'Edit Note' function
   const editNote = (noteID, newContent) => {
-    setNotes(
-      produce((draft) => {
-        draft[noteID].title = newContent.title;
-        draft[noteID].text = newContent.text;
-      }),
-    );
+    updateNoteContent(noteID, newContent);
   };
 
   // 'Move Note' function
   const moveNote = (noteID, newX, newY) => {
     setMaxZ((prevMaxZ) => prevMaxZ + 1);
-    setNotes(
-      produce((draft) => {
-        draft[noteID].x = newX;
-        draft[noteID].y = newY;
-        draft[noteID].zIndex = maxZ + 1;
-      }),
-    );
+    updateNotePosition(noteID, newX, newY, maxZ);
   };
 
   useEffect(() => {
-    console.log(notes);
+    const unsubscribe = onNotesValueChange((newNotes) => {
+      setNotes(newNotes);
+      setLoading(false);
+    });
+
+    return () => {
+      if (unsubscribe) unsubscribe();
+    };
   }, []);
+
+  if (loading) {
+    return <div id="loading-screen">Loading...</div>;
+  }
 
   return (
     <div>
