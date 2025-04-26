@@ -12,11 +12,7 @@ root directory.
 
 ## Deployment
 
-TODO: add deployed link and short description of how you deployed
-
-## Acknowledgments
-
-TODO: provide a list of sources used in project
+Deployed via [render](https://render.com/) at this [link](https://lab3-react-notes-rodillasjavier.onrender.com).
 
 ## Functional Specs
 
@@ -27,5 +23,5 @@ TODO: provide a list of sources used in project
 - note structure
   - [x] title
   - [x] content
-- [ ] persists all changes in real time
-- [ ] updates based on fb events
+- [x] persists all changes in real time
+- [x] updates based on fb events

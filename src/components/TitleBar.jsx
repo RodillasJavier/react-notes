@@ -24,23 +24,25 @@ function TitleBar(props) {
 
   return (
     <div className="masthead">
-      <input
-        type="text"
-        placeholder="Enter title for a new note here..."
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter') {
-            handleAdd();
-          }
+      <form className="noteinput"
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleAdd();
         }}
-      />
+      >
+        <input
+          type="text"
+          placeholder="Enter title for a new note here..."
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+      </form>
       <i
         className="fa-solid fa-plus icon"
         onClick={handleAdd}
         role="button"
         tabIndex={0}
-        aria-label="Add Note Button"
+        aria-label="add"
       />
     </div>
   );
