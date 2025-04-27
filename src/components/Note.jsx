@@ -84,9 +84,9 @@ function Note(props) {
           <h1 className="title">{props.note.title}</h1>
 
           <div className="kebab-menu">
-            {/* Menu Icon */}
+            {/* Kebab Icon */}
             <i className="fa-solid fa-ellipsis-vertical icon"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              onClick={() => { setIsMenuOpen(!isMenuOpen); }}
               role="button"
               tabIndex={0}
               aria-label="menu"
@@ -94,7 +94,7 @@ function Note(props) {
 
             {/* Note Menu Element */}
             <NoteMenu
-              isOpen={isMenuOpen}
+              isMenuOpen={isMenuOpen}
               onClose={() => setIsMenuOpen(false)}
               onEdit={handleEditToggle}
               onDelete={handleDelete}
