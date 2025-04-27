@@ -51,7 +51,7 @@ function TitleBar(props) {
       </form>
 
       <div id="page-header">
-        <h1 id="page-title">React Notes V.2.2</h1>
+        <h1 id="page-title">React Notes V.2.3</h1>
         <h2 id="page-subtitle">By Javier A. Rodillas</h2>
       </div>
 
