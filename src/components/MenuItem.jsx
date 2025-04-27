@@ -1,7 +1,7 @@
 import React from 'react';
 
+/* Props: icon, label, onClick, tabIndex */
 function MenuItem(props) {
-  // Props: icon, label, onClick, tabIndex
   return (
     <div
       className="menu-item-wrapper"

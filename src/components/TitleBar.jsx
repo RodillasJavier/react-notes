@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+/* Props: addNote */
 function TitleBar(props) {
   const [title, setTitle] = useState('');
 

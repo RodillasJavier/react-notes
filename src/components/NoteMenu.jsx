@@ -1,8 +1,8 @@
 import React from 'react';
 import MenuItem from './MenuItem';
 
+/* Props: isMenuOpen, onClose, onEdit, onDelete, isEditing */
 function NoteMenu(props) {
-  // Props: isMenuOpen, onClose, onEdit, onDelete, isEditing
   if (!props.isOpen) { return null; }
 
   return (
