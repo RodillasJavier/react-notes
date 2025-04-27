@@ -26,7 +26,7 @@ function NoteMenu(props) {
       {/* Close Menu Icon */}
       <MenuItem
         icon="fa-xmark"
-        label="Close Menu"
+        label="Close"
         onClick={props.onClose}
         tabIndex={-2}
       />
