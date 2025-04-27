@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import Draggable from 'react-draggable';
 import Markdown from 'react-markdown';
+import NoteMenu from './NoteMenu';
 
 function Note(props) {
   const nodeRef = useRef(null);
@@ -64,35 +65,6 @@ function Note(props) {
     setIsEditing(!isEditing);
   };
 
-  // Update the edit icon based on the mode that we are in
-  const renderEditIcon = () => {
-    if (!isEditing) {
-      return (
-        <div className="menu-item-wrapper"
-          onClick={handleEditToggle}
-          role="button"
-          tabIndex="0"
-          aria-label="edit"
-        >
-          <i className="fa-solid fa-pen icon" />
-          <p className="icon-label">Edit Note</p>
-        </div>
-      );
-    } else {
-      return (
-        <div className="menu-item-wrapper"
-          onClick={handleEditToggle}
-          role="button"
-          tabIndex="0"
-          aria-label="edit"
-        >
-          <i className="fa-solid fa-floppy-disk icon" />
-          <p className="icon-label">Save Note</p>
-        </div>
-      );
-    }
-  };
-
   return (
     // Each note is 'draggable'
     <Draggable
@@ -112,6 +84,7 @@ function Note(props) {
           <h1 className="title">{props.note.title}</h1>
 
           <div className="kebab-menu">
+            {/* Menu Icon */}
             <i className="fa-solid fa-ellipsis-vertical icon"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               role="button"
@@ -119,36 +92,14 @@ function Note(props) {
               aria-label="menu"
             />
 
-            {isMenuOpen && (
-              <div className="menu-items">
-
-                {renderEditIcon()}
-                {/* Delete icon */}
-                <div
-                  className="menu-item-wrapper"
-                  onClick={handleDelete}
-                  role="button"
-                  tabIndex={-1}
-                  aria-label="delete"
-                >
-                  <i className="fa-solid fa-trash icon" />
-                  <p className="icon-label">Delete Note</p>
-                </div>
-
-                <div
-                  className="menu-item-wrapper"
-                  onClick={() => setIsMenuOpen(!isMenuOpen)}
-                  role="button"
-                  tabIndex={-2}
-                  aria-label="close"
-                >
-                  <i className="fa-solid fa-xmark icon" />
-                  <p className="icon-label">Close Menu</p>
-                </div>
-
-              </div>
-            )}
-
+            {/* Note Menu Element */}
+            <NoteMenu
+              isOpen={isMenuOpen}
+              onClose={() => setIsMenuOpen(false)}
+              onEdit={handleEditToggle}
+              onDelete={handleDelete}
+              isEditing={isEditing}
+            />
           </div>
 
         </div>
