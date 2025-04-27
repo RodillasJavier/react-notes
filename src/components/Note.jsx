@@ -5,6 +5,7 @@ import Markdown from 'react-markdown';
 function Note(props) {
   const nodeRef = useRef(null);
   const [isEditing, setIsEditing] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [noteContent, setNoteContent] = useState({
     title: props.note.title,
     text: props.note.text,
@@ -30,7 +31,6 @@ function Note(props) {
     } else {
       return (
         <div className="content">
-          <h1 className="title">{props.note.title}</h1>
           <Markdown>{props.note.text}</Markdown>
         </div>
       );
@@ -68,23 +68,27 @@ function Note(props) {
   const renderEditIcon = () => {
     if (!isEditing) {
       return (
-        <i
+        <div className="menu-item-wrapper"
           onClick={handleEditToggle}
-          className="fa-solid fa-pen icon"
           role="button"
           tabIndex="0"
           aria-label="edit"
-        />
+        >
+          <i className="fa-solid fa-pen icon" />
+          <p className="icon-label">Edit Note</p>
+        </div>
       );
     } else {
       return (
-        <i
+        <div className="menu-item-wrapper"
           onClick={handleEditToggle}
-          className="fa-solid fa-floppy-disk icon"
           role="button"
           tabIndex="0"
-          aria-label="done-editing"
-        />
+          aria-label="edit"
+        >
+          <i className="fa-solid fa-floppy-disk icon" />
+          <p className="icon-label">Save Note</p>
+        </div>
       );
     }
   };
@@ -93,7 +97,7 @@ function Note(props) {
     // Each note is 'draggable'
     <Draggable
       nodeRef={nodeRef}
-      handle=".drag-handle"
+      handle=".note-header"
       defaultPosition={{ x: 20, y: 20 }} // if no position given
       position={{ x: parseInt(props.note.x, 10), y: parseInt(props.note.y, 10) }}
       onStart={handleDrag}
@@ -103,17 +107,50 @@ function Note(props) {
       {/* Our note element */}
       <div ref={nodeRef} id={props.id} className="note" style={{ zIndex: props.note.zIndex }}>
 
-        {/* Toolbar to contain our controls for the notes */}
-        <div className="toolbar">
-          <i
-            onClick={handleDelete}
-            className="fa-solid fa-trash icon"
-            role="button"
-            tabIndex="0"
-            aria-label="delete"
-          />
-          <i className="fa-solid fa-grip-lines icon drag-handle" />
-          {renderEditIcon()}
+        {/* Header to include tool menu + Title */}
+        <div className="note-header">
+          <h1 className="title">{props.note.title}</h1>
+
+          <div className="kebab-menu">
+            <i className="fa-solid fa-ellipsis-vertical icon"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              role="button"
+              tabIndex={0}
+              aria-label="menu"
+            />
+
+            {isMenuOpen && (
+              <div className="menu-items">
+
+                {renderEditIcon()}
+                {/* Delete icon */}
+                <div
+                  className="menu-item-wrapper"
+                  onClick={handleDelete}
+                  role="button"
+                  tabIndex={-1}
+                  aria-label="delete"
+                >
+                  <i className="fa-solid fa-trash icon" />
+                  <p className="icon-label">Delete Note</p>
+                </div>
+
+                <div
+                  className="menu-item-wrapper"
+                  onClick={() => setIsMenuOpen(!isMenuOpen)}
+                  role="button"
+                  tabIndex={-2}
+                  aria-label="close"
+                >
+                  <i className="fa-solid fa-xmark icon" />
+                  <p className="icon-label">Close Menu</p>
+                </div>
+
+              </div>
+            )}
+
+          </div>
+
         </div>
 
         {/* Display our content */}
