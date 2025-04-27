@@ -1,10 +1,12 @@
 import React, { useRef, useState } from 'react';
 import Draggable from 'react-draggable';
 import Markdown from 'react-markdown';
+import NoteMenu from './NoteMenu';
 
 function Note(props) {
   const nodeRef = useRef(null);
   const [isEditing, setIsEditing] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [noteContent, setNoteContent] = useState({
     title: props.note.title,
     text: props.note.text,
@@ -30,7 +32,6 @@ function Note(props) {
     } else {
       return (
         <div className="content">
-          <h1 className="title">{props.note.title}</h1>
           <Markdown>{props.note.text}</Markdown>
         </div>
       );
@@ -64,36 +65,11 @@ function Note(props) {
     setIsEditing(!isEditing);
   };
 
-  // Update the edit icon based on the mode that we are in
-  const renderEditIcon = () => {
-    if (!isEditing) {
-      return (
-        <i
-          onClick={handleEditToggle}
-          className="fa-solid fa-pen icon"
-          role="button"
-          tabIndex="0"
-          aria-label="edit"
-        />
-      );
-    } else {
-      return (
-        <i
-          onClick={handleEditToggle}
-          className="fa-solid fa-floppy-disk icon"
-          role="button"
-          tabIndex="0"
-          aria-label="done-editing"
-        />
-      );
-    }
-  };
-
   return (
     // Each note is 'draggable'
     <Draggable
       nodeRef={nodeRef}
-      handle=".drag-handle"
+      handle=".note-header"
       defaultPosition={{ x: 20, y: 20 }} // if no position given
       position={{ x: parseInt(props.note.x, 10), y: parseInt(props.note.y, 10) }}
       onStart={handleDrag}
@@ -103,17 +79,29 @@ function Note(props) {
       {/* Our note element */}
       <div ref={nodeRef} id={props.id} className="note" style={{ zIndex: props.note.zIndex }}>
 
-        {/* Toolbar to contain our controls for the notes */}
-        <div className="toolbar">
-          <i
-            onClick={handleDelete}
-            className="fa-solid fa-trash icon"
-            role="button"
-            tabIndex="0"
-            aria-label="delete"
-          />
-          <i className="fa-solid fa-grip-lines icon drag-handle" />
-          {renderEditIcon()}
+        {/* Header to include tool menu + Title */}
+        <div className="note-header">
+          <h1 className="title">{props.note.title}</h1>
+
+          <div className="kebab-menu">
+            {/* Menu Icon */}
+            <i className="fa-solid fa-ellipsis-vertical icon"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              role="button"
+              tabIndex={0}
+              aria-label="menu"
+            />
+
+            {/* Note Menu Element */}
+            <NoteMenu
+              isOpen={isMenuOpen}
+              onClose={() => setIsMenuOpen(false)}
+              onEdit={handleEditToggle}
+              onDelete={handleDelete}
+              isEditing={isEditing}
+            />
+          </div>
+
         </div>
 
         {/* Display our content */}

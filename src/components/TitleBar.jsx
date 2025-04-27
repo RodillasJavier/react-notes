@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+/* Props: addNote */
 function TitleBar(props) {
   const [title, setTitle] = useState('');
 
@@ -48,6 +49,11 @@ function TitleBar(props) {
         />
 
       </form>
+
+      <div id="page-header">
+        <h1 id="page-title">React Notes V.2.2</h1>
+        <h2 id="page-subtitle">By Javier A. Rodillas</h2>
+      </div>
 
     </div>
   );
