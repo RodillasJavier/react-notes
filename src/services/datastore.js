@@ -8,6 +8,7 @@ const config = {
   storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
   projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
 };
+
 firebase.initializeApp(config);
 
 const database = firebase.database();
